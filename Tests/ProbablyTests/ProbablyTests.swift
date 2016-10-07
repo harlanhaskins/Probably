@@ -12,11 +12,11 @@ class ProbablyTests: XCTestCase {
     }
     
     func testContinuous() {
-        let bertrandsProblem = Continuous(min: 0, max: M_PI_2) { x in
+        let bertrandsProblem = Continuous(min: 0, max: M_PI_2,
+                                          riemannInterval: 0.01) { x in
             return sin(x)
         }
-        let p = bertrandsProblem.distribution(.less(M_PI_4),
-                                              riemannInterval: 0.001)
+        let p = bertrandsProblem.distribution(.less(M_PI_4))
         XCTAssertEqualWithAccuracy(p, 0.293, accuracy: 0.01)
     }
     

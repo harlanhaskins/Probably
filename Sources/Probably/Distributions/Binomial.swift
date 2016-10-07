@@ -12,7 +12,7 @@ import Foundation
 /// let distribution = Binomial(population: 3, probability: 0.5)
 /// let probability = distribution.probability(of: 3)
 /// ```
-public struct Binomial: Distribution {
+public struct Binomial: RandomVariable {
     public let min = 0
     public var max: Int {
         return population

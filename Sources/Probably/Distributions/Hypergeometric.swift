@@ -14,7 +14,7 @@
 /// let probability = distribution.probability(of: 2)
 /// // probability is 23.8%
 /// ```
-public struct Hypergeometric: Distribution {
+public struct Hypergeometric: RandomVariable {
     public let numberOfTrials: Int
     public let successesInPopulation: Int
     public let population: Int

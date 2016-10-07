@@ -2,7 +2,20 @@ import Foundation
 
 
 /// A Poisson distribution, centered around a mean, `mu`.
-public struct Poisson: Distribution {
+/// 
+/// For a given event, the Poisson distribution models probability based solely
+/// on an average.
+///
+/// For example, the average number of students that pass a midterm stats exam
+/// for a given year is 74
+/// The probability that 85 students will pass this term, assuming
+/// population is constant, is a Poisson probability:
+/// ```
+/// let poisson = Poisson(mu: 14)
+/// let probability = poisson.probability(of: 18)
+/// // probability is 5.5%
+/// ```
+public struct Poisson: RandomVariable {
     public typealias Interval = Int
     public let min = 0
     public let max = Int.max - 1

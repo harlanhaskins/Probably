@@ -16,7 +16,7 @@ import Foundation
 /// let probability = distribution.probability(of: 4)
 /// // probability is 5.63%
 /// ```
-public struct NegativeBinomial: Distribution {
+public struct NegativeBinomial: RandomVariable {
     public typealias Interval = Int
     public let requiredSuccesses: Int
     public let p: Double
