@@ -10,6 +10,24 @@ class ProbablyTests: XCTestCase {
         XCTAssertEqualWithAccuracy(p.variance(), 2.0, accuracy: 0.01)
         XCTAssertEqualWithAccuracy(p.standardDeviation(), 1.414, accuracy: 0.01)
     }
+    
+    func testContinuous() {
+        let bertrandsProblem = Continuous(min: 0, max: M_PI_2) { x in
+            return sin(x)
+        }
+        let p = bertrandsProblem.distribution(.less(M_PI_4),
+                                              riemannInterval: 0.001)
+        XCTAssertEqualWithAccuracy(p, 0.293, accuracy: 0.01)
+    }
+    
+    func testHypergeometric() {
+        
+        let distribution = Hypergeometric(numberOfTrials: 5,
+                                          successesInPopulation: 12,
+                                          population: 20)
+        let probability = distribution.probability(of: 2)
+        XCTAssertEqualWithAccuracy(probability, 0.238, accuracy: 0.01)
+    }
 
     static var allTests : [(String, (ProbablyTests) -> () throws -> Void)] {
         return [
