@@ -11,7 +11,6 @@ public protocol RandomVariable {
     /// The maximum value this random variable can be
     var max: Interval { get }
     
-    
     /// Computes probability that a given value is the result of
     /// this random variable.
     ///
