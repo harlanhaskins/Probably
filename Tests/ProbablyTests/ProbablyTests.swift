@@ -97,6 +97,8 @@ class ProbablyTests: XCTestCase {
                                    accuracy: 0.01)
         
         XCTAssertEqualWithAccuracy(flips.expected(), 5.0, accuracy: 0.01)
+        XCTAssertEqualWithAccuracy(flips.variance(), 10.0, accuracy: 0.01)
+        XCTAssertEqualWithAccuracy(flips.standardDeviation(), 3.162, accuracy: 0.01)
     }
     
     func testStandard() {
