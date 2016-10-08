@@ -1,4 +1,4 @@
-# Probably [![Build Status](https://travis-ci.org/harlanhaskins/Probably.svg?branch=master)](https://travis-ci.org/harlanhaskins/Probably)
+# Probably [![Build Status](https://travis-ci.org/harlanhaskins/Probably.svg?branch=master)](https://travis-ci.org/harlanhaskins/Probably) [![codecov.io](https://codecov.io/gh/harlanhaskins/Probably/coverage.svg?branch=master)](https://codecov.io/gh/harlanhaskins/Probably?branch=master)
 
 Probably is a set of Swift structures for computing the probability and
 cumulative distributions of different probablistic functions.
