@@ -11,8 +11,8 @@ import Foundation
 ///
 /// - note: The function used to create a continuous distribution must sum to
 ///         1 over the bounds of the distribution. You can test this by checking
-///         `probability.distribution(.less(upperBound), riemannInterval: 0.01)`
-public struct Continuous: RandomVariable, NormallyVaried {
+///         `probability.distribution(.less(upperBound)) ~== 1.0`
+public struct Continuous: RandomVariable, Transformable {
     public let min: Double
     public let max: Double
     public let riemannInterval: Double
@@ -20,6 +20,9 @@ public struct Continuous: RandomVariable, NormallyVaried {
     
     public typealias Interval = Double
     
+    /// For a continuous distribution, the probability of a single value is
+    /// always zero. You must check the probability distribution over a
+    /// given interval.
     public func probability(of x: Interval) -> Double {
         return 0
     }
@@ -63,4 +66,16 @@ public struct Continuous: RandomVariable, NormallyVaried {
         }
         return sum
     }
+}
+
+infix operator ~==: ComparisonPrecedence
+
+/// Tells whether two doubles are approximately equal
+///
+/// - parameters:
+///   - lhs: The first Double to check
+///   - rhs: The second Double to check
+/// - returns: `true` if both Doubles are within `0.001` of each other
+public func ~==(lhs: Double, rhs: Double) -> Bool {
+    return abs(lhs - rhs) < 0.001
 }

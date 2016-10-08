@@ -12,14 +12,19 @@ import Foundation
 /// with a Negative Binomial distribution, like so:
 /// 
 /// ```
-/// let distribution = NegativeBinomial(requiredSuccesses: 3, p: 0.55)
+/// let distribution = NegativeBinomial(requiredSuccesses: 3, 
+///                                     probability: 0.55)
 /// let probability = distribution.probability(of: 4)
 /// // probability is 5.63%
 /// ```
 public struct NegativeBinomial: RandomVariable {
     public typealias Interval = Int
+    
+    /// The number of successes you're aiming for
     public let requiredSuccesses: Int
-    public let p: Double
+    
+    /// The probability of one independent trial being successful
+    public let probability: Double
     
     public let min = 0
     public var max: Int {
@@ -27,15 +32,16 @@ public struct NegativeBinomial: RandomVariable {
     }
     
     public func probability(of x: Int) -> Double {
-        return Double((x + requiredSuccesses - 1).choose(requiredSuccesses-1)) *
-            pow(p, Double(x)) *
-            pow(1-p, Double(x))
+        guard x >= requiredSuccesses else { return 0 }
+        return Double((x + requiredSuccesses - 1).choose(requiredSuccesses - 1)) *
+            pow(probability, Double(x)) *
+            pow(1 - probability, Double(x))
     }
     public func expected() -> Double {
-        return (Double(requiredSuccesses) * (1.0 - p)) / p
+        return (Double(requiredSuccesses) * probability) / (1.0 - probability)
     }
     
     public func variance() -> Double {
-        return (Double(requiredSuccesses) * (1.0 - p)) / pow(p, 2)
+        return (Double(requiredSuccesses) * probability) / pow(1.0 - probability, 2)
     }
 }

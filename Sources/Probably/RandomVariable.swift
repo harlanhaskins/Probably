@@ -61,22 +61,30 @@ public extension RandomVariable {
     }
 }
 
-public protocol NormallyVaried: RandomVariable {
+/// A Random Variable which can transform the expected values or variance
+/// using a function.
+public protocol Transformable: RandomVariable {
     func expected(_ h: (Double) -> Double) -> Double
     func variance(_ h: (Double) -> Double) -> Double
 }
 
-public extension NormallyVaried {
+public extension Transformable {
+    /// - returns: The mean of this distribution
     public func expected() -> Double {
         return expected { $0 }
     }
     
+    /// - returns: The variance of this distribution
     public func variance() -> Double {
         return variance { $0 }
     }
     
+    /// - parameter h: The transform function to apply to each step of the
+    ///                distribution during calculation
+    /// - returns: The variance of this distribution as a function of E(h(X)):
+    /// - note: `V(h(X)) = E(h(X)²) - E(h(X))²`
     public func variance(_ h: (Double) -> Double) -> Double {
-        // V(X) = E(X²) - E(X)²
+        
         let exp = expected(h)
         let squared = expected {
             let x = h($0)
