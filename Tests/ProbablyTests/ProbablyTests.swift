@@ -151,6 +151,7 @@ class ProbablyTests: XCTestCase {
         XCTAssert(2.5 ~== (5.0 / 2.0))
     }
 
+    #if !(os(macOS) || os(iOS) || os(tvOS) || os(watchOS))
     static var allTests : [(String, (ProbablyTests) -> () throws -> Void)] {
         return [
             ("testPoisson", testPoisson),
@@ -161,4 +162,5 @@ class ProbablyTests: XCTestCase {
             ("testRelations", testRelations)
         ]
     }
+    #endif
 }
