@@ -70,6 +70,12 @@ class ProbablyTests: XCTestCase {
         // are injket
         let d = printers.distribution(.less(than: 3))
         XCTAssertEqualWithAccuracy(d, 0.296, accuracy: 0.01)
+        
+        // what is the expected number of inkjet printers when testing 5 of them?
+        XCTAssertEqualWithAccuracy(printers.expected(), 3.0, accuracy: 0.01)
+        
+        // what is the variance of inkjet printers when testing 5?
+        XCTAssertEqualWithAccuracy(printers.variance(), 1.579, accuracy: 0.01)
     }
     
     func testNegativeBinomial() {
@@ -115,6 +121,11 @@ class ProbablyTests: XCTestCase {
                                    accuracy: 0.01)
         XCTAssertEqualWithAccuracy(complaints.standardDeviation(), 1.73,
                                    accuracy: 0.01)
+        
+        let transform: (Double) -> Double = { ($0 * 3) + 1 }
+        XCTAssertEqualWithAccuracy(complaints.expected(transform), 7.9, accuracy: 0.01)
+        XCTAssertEqualWithAccuracy(complaints.variance(transform), 27.09, accuracy: 0.01)
+        XCTAssertEqualWithAccuracy(complaints.standardDeviation(transform), 5.20, accuracy: 0.01)
     }
     
     func testRelations() {
