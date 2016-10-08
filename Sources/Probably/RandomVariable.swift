@@ -24,10 +24,10 @@ public protocol RandomVariable {
     /// - returns: The mean of this distribution
     func expected() -> Double
     
-    /// - Returns: The variance of this distribution
+    /// - returns: The variance of this distribution
     func variance() -> Double
     
-    /// - Returns: The standard deviation of this distribution
+    /// - returns: The standard deviation of this distribution
     func standardDeviation() -> Double
 }
 
@@ -35,6 +35,13 @@ public extension RandomVariable
     where Interval: IntegerArithmetic,
     Interval: ExpressibleByIntegerLiteral,
 Interval: Strideable, Interval.Stride: SignedInteger {
+    
+    /// The cumulative distribution for a given relation.
+    ///
+    /// - parameter relation: The relation you're checking, like `.less(10)`,
+    ///                       `.greaterOrEqual(4)`
+    /// - returns: The cumulative distribution of probability over the specified
+    ///            interval.
     public func distribution(_ relation: Relation<Interval>) -> Double {
         return CountableRange(relation.range(min: min, max: max)).reduce(0) { d, x in
             d + probability(of: x)
@@ -43,6 +50,12 @@ Interval: Strideable, Interval.Stride: SignedInteger {
 }
 
 public extension RandomVariable {
+    
+    /// The standard deviation of this random variable.
+    /// Computed as the square root of the variance.
+    ///
+    /// - returns: The standard deviation from the expected value of
+    ///            this variable
     public func standardDeviation() -> Double {
         return sqrt(variance())
     }
@@ -70,5 +83,9 @@ public extension NormallyVaried {
             return x * x
         }
         return squared - (exp * exp)
+    }
+    
+    public func standardDeviation(_ h: (Double) -> Double) -> Double {
+        return sqrt(variance(h))
     }
 }
