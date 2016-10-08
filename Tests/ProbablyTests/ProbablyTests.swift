@@ -144,6 +144,12 @@ class ProbablyTests: XCTestCase {
         XCTAssertEqual(Relation.between(5.0, and: 7.0).range(min: 0, max: 10),
                        5.0..<7.0)
     }
+    
+    func testApproximateEquality() {
+        XCTAssert(1.0 ~== (10.0 / 10.0))
+        XCTAssert(0.33333333 ~== (1.0 / 3.0))
+        XCTAssert(2.5 ~== (5.0 / 2.0))
+    }
 
     static var allTests : [(String, (ProbablyTests) -> () throws -> Void)] {
         return [
