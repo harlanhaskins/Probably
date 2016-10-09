@@ -11,6 +11,18 @@ Right now, it supports:
   - Hypergeometric distributions
   - Poisson distributions
   - Negative Binomial distributions
+  
+# Installation
+
+Probably is available through the Swift Package Manager.
+
+Just add this git repository as a dependency:
+
+```
+.Package(url: "https://github.com/harlanhaskins/Probably.git", majorVersion: 0, minorVersion: 1)
+```
+
+And it should download the project and link it in.
 
 # Author
 Harlan Haskins [@harlanhaskins](https://github.com/harlanhaskins)
