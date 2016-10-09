@@ -39,32 +39,29 @@ public struct Continuous: RandomVariable, Transformable {
     
     public func distribution(_ relation: Relation<Double>) -> Double {
         let range = relation.range(min: min, max: max)
-        return riemannSum(range: range, function: function)
+        return riemannSum(range: range,
+                          min: min, max: max,
+                          interval: riemannInterval,
+                          function: function)
     }
     
     public func expected(_ h: (Double) -> Double) -> Double {
-        return riemannSum(range: min..<max) { x in
+        return riemannSum(range: min..<max,
+                          min: min,
+                          max: max,
+                          interval: riemannInterval) { x in
             h(x) * function(x)
         }
     }
     
     public func variance(_ h: (Double) -> Double) -> Double {
         let exp = expected(h)
-        return riemannSum(range: min..<max) { x in
+        return riemannSum(range: min..<max,
+                          min: min,
+                          max: max,
+                          interval: riemannInterval) { x in
             pow(x - exp, 2) * function(x)
         }
-    }
-    
-    private func riemannSum(range: Range<Double>, function: (Double) -> Double) -> Double {
-        var sum = 0.0
-        var lower = range.lowerBound
-        let upper = Swift.min(max, range.upperBound)
-        while lower <= upper {
-            let value = lower >= min ? function(lower) : 0
-            sum += value * riemannInterval
-            lower += riemannInterval
-        }
-        return sum
     }
 }
 

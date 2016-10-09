@@ -5,7 +5,7 @@ import Foundation
 class ProbablyTests: XCTestCase {
     
     func testPoisson() {
-        let p = Poisson(mu: 2)
+        let p = Poisson(mean: 2)
         XCTAssertEqualWithAccuracy(p.probability(of: 2), 0.271, accuracy: 0.01)
         XCTAssertEqualWithAccuracy(p.distribution(.lessThanOrEqual(to: 5)),
                                    0.983, accuracy: 0.01)
@@ -131,18 +131,15 @@ class ProbablyTests: XCTestCase {
     }
     
     func testRelations() {
-        XCTAssertEqual(Relation.less(than: 5.0).range(min: 0, max: 10),
-                       0..<5)
-        XCTAssertEqual(Relation.lessThanOrEqual(to: 5.0).range(min: 0, max: 10),
-                       0.0..<6.0)
-        XCTAssertEqual(Relation.greater(than: 5.0).range(min: 0, max: 10),
-                       6.0..<11.0)
-        XCTAssertEqual(Relation.greaterThanOrEqual(to: 5.0).range(min: 0, max: 10),
-                       5.0..<11.0)
-        XCTAssertEqual(Relation.equal(to: 5.0).range(min: 0, max: 10),
-                       5.0..<6.0)
-        XCTAssertEqual(Relation.between(5.0, and: 7.0).range(min: 0, max: 10),
-                       5.0..<7.0)
+        let r: (Relation<Double>) -> Range<Double> = {
+            $0.range(min: 0, max: 10)
+        }
+        XCTAssertEqual(r(.less(than: 5.0)), 0..<5)
+        XCTAssertEqual(r(.lessThanOrEqual(to: 5.0)), 0.0..<6.0)
+        XCTAssertEqual(r(.greater(than: 5.0)), 6.0..<11.0)
+        XCTAssertEqual(r(.greaterThanOrEqual(to: 5.0)), 5.0..<11.0)
+        XCTAssertEqual(r(.equal(to: 5.0)), 5.0..<6.0)
+        XCTAssertEqual(r(.between(5.0, and: 7.0)), 5.0..<7.0)
     }
     
     func testApproximateEquality() {

@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// A Poisson distribution, centered around a mean, `mu`.
 /// 
 /// For a given event, the Poisson distribution models probability based solely
@@ -21,18 +20,18 @@ public struct Poisson: RandomVariable {
     public let min = 0
     public let max = Int.max - 1
     
-    private static let e = 2.7182818284590452353602
-    
     /// The mean of probabilities over this distribution
-    public let mu: Double
+    public let mean: Double
     
     public func probability(of x: Interval) -> Double {
-        return (pow(Poisson.e, -mu) * pow(mu, Double(x))) / Double(x.factorial)
+        return (pow(M_E, -mean) * pow(mean, Double(x))) / Double(x.factorial)
     }
+    
     public func expected() -> Double {
-        return mu
+        return mean
     }
+    
     public func variance() -> Double {
-        return mu
+        return mean
     }
 }
