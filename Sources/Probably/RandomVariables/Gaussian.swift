@@ -16,7 +16,7 @@ struct Gaussian: RandomVariable {
     private let _mean: Double
     private let _variance: Double
     internal let min = 0.0
-    internal let max = DBL_MAX - 1
+    internal let max = Double.max - 1
     private let riemannInterval: Double
     
     
