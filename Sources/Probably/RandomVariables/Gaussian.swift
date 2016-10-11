@@ -15,8 +15,8 @@ typealias Normal = Gaussian
 struct Gaussian: RandomVariable {
     private let _mean: Double
     private let _variance: Double
-    internal let min = 0.0
-    internal let max = Double.max - 1
+    public let min = 0.0
+    public let max = Double.max - 1
     private let riemannInterval: Double
     
     
