@@ -12,12 +12,4 @@ extension Int {
         }
         return result
     }
-    
-    
-    /// The factorial of the receiver.
-    /// - note: This number must be positive.
-    var factorial: Int {
-        precondition(self >= 0, "argument to factorial must be positive")
-        return self < 2 ? 1 : (2...self).reduce(1, *)
-    }
 }

@@ -6,7 +6,11 @@ import Foundation
 /// For a given set of probabilities, this will model those probabilities and
 /// be able to compute a cumulative distribution function automatically from
 /// those explicit probabilities.
-struct Standard: RandomVariable, Transformable {
+struct Discrete<ValueContainer>: RandomVariable, Transformable
+    where ValueContainer: RandomAccessCollection,
+          ValueContainer.IndexDistance == Int,
+          ValueContainer.Index == Int,
+          ValueContainer.Iterator.Element == Double {
     let min = 0
     var max: Int {
         return values.count - 1
@@ -14,7 +18,7 @@ struct Standard: RandomVariable, Transformable {
     
     /// The explicit distribution of probabilities in this distrbution,
     /// with probabilities associated with their zero-based index.
-    let values: [Double]
+    let values: ValueContainer
     
     public func probability(of x: Int) -> Double {
         return values[x]

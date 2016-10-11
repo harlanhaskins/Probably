@@ -24,7 +24,7 @@ public struct Poisson: RandomVariable {
     public let mean: Double
     
     public func probability(of x: Interval) -> Double {
-        return (pow(M_E, -mean) * pow(mean, Double(x))) / Double(x.factorial)
+        return (pow(M_E, -mean) * pow(mean, Double(x))) / tgamma(Double(x) + 1)
     }
     
     public func expected() -> Double {

@@ -15,15 +15,23 @@ import Foundation
 public struct Continuous: RandomVariable, Transformable {
     public let min: Double
     public let max: Double
-    public let riemannInterval: Double
-    public let function: (Double) -> Double
     
-    public typealias Interval = Double
+    
+    /// The interval used to compute the integral of the provided function.
+    /// Set this to a smaller number if you need greater precision in
+    /// the distribution. Default is 0.01.
+    public let riemannInterval: Double
+    
+    /// The function that provides the probability for this distribution.
+    /// - note: This function MUST sum to 1 over the `min` and `max`.
+    ///         Failure to do so is a serious error and will produce
+    ///         incorrect probability distributions.
+    public let function: (Double) -> Double
     
     /// For a continuous distribution, the probability of a single value is
     /// always zero. You must check the probability distribution over a
     /// given interval.
-    public func probability(of x: Interval) -> Double {
+    public func probability(of x: Double) -> Double {
         return 0
     }
     

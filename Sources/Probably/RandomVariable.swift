@@ -30,10 +30,7 @@ public protocol RandomVariable {
     func standardDeviation() -> Double
 }
 
-public extension RandomVariable
-    where Interval: IntegerArithmetic,
-    Interval: ExpressibleByIntegerLiteral,
-Interval: Strideable, Interval.Stride: SignedInteger {
+public extension RandomVariable where Interval == Int {
     
     /// The cumulative distribution for a given relation.
     ///
