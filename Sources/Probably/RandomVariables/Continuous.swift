@@ -35,10 +35,10 @@ public struct Continuous: RandomVariable, Transformable {
         return 0
     }
     
-    init(min: Double,
-         max: Double,
-         riemannInterval: Double = 0.01,
-         function: @escaping (Double) -> Double) {
+    public init(min: Double,
+                max: Double,
+                riemannInterval: Double = 0.01,
+                function: @escaping (Double) -> Double) {
         self.min = min
         self.max = max
         self.riemannInterval = riemannInterval
