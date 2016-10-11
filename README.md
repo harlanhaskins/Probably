@@ -10,6 +10,7 @@ Right now, it supports:
   - Binomial distributions
   - Hypergeometric distributions
   - Poisson distributions
+  - Gaussian distributions
   - Negative Binomial distributions
   
 # Installation
