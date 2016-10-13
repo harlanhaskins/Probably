@@ -169,6 +169,7 @@ class ProbablyTests: XCTestCase {
             ("testContinuous", testContinuous),
             ("testHypergeometric", testHypergeometric),
             ("testBinomial", testBinomial),
+            ("testGaussian", testGaussian),
             ("testDiscrete", testDiscrete),
             ("testRelations", testRelations)
         ]
