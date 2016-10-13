@@ -8,11 +8,11 @@
 
 import Foundation
 
-public typealias Normal = Gaussian
+public typealias Gaussian = Normal
 
-/// A Gaussian (Normal) distribution, centered around a mean, with a given
+/// A Normal (Gaussian) distribution, centered around a mean, with a given
 /// variance.
-public struct Gaussian: RandomVariable {
+public struct Normal: RandomVariable {
     private let _mean: Double
     private let _variance: Double
     public let min = 0.0
@@ -20,8 +20,8 @@ public struct Gaussian: RandomVariable {
     private let riemannInterval: Double
     
     
-    /// The standard gaussian distribution with a mean of 0 and variance of 1.
-    public static let normal = Gaussian(mean: 0.0, variance: 1.0)
+    /// The standard normal distribution with a mean of 0 and variance of 1.
+    public static let standard = Normal(mean: 0.0, variance: 1.0)
     
     public init(mean: Double, variance: Double, riemannInterval: Double = 0.01) {
         self._mean = mean
@@ -35,6 +35,16 @@ public struct Gaussian: RandomVariable {
     
     public func variance() -> Double {
         return _variance
+    }
+    
+    /// Standardizes a value by adjusting it so it fits in the Standard Normal
+    /// Distribution.
+    ///
+    /// - parameter x: The number to check, in the current distribution
+    /// - returns: The value in the Standard Normal distribution with the same
+    ///            cdf and pdf.
+    public func standardize(x: Double) -> Double {
+        return (x - _mean) / standardDeviation()
     }
     
     public func probability(of x: Double) -> Double {
