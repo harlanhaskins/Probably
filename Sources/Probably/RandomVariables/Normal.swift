@@ -49,7 +49,7 @@ public struct Normal: RandomVariable {
     
     public func probability(of x: Double) -> Double {
         let denom = sqrt(2 * _variance * M_PI)
-        let rhs = pow(M_E, -(pow(x - _mean, 2) / (2 * _variance)))
+        let rhs = exp(-(pow(x - _mean, 2) / (2 * _variance)))
         return (1 / denom) * rhs
     }
     

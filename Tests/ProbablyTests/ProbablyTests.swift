@@ -144,6 +144,33 @@ class ProbablyTests: XCTestCase {
         XCTAssertEqualWithAccuracy(s, -0.96, accuracy: 0.01)
     }
     
+    func testExponential() {
+        do {
+            let p = Exponential(scale: 2.0)
+            XCTAssertEqualWithAccuracy(p.probability(of: 0.5), 0.735, accuracy: 0.01)
+            XCTAssertEqualWithAccuracy(p.distribution(lessThan: 0.5), 0.632, accuracy: 0.01)
+            XCTAssertEqualWithAccuracy(p.expected(), 0.5, accuracy: 0.01)
+            XCTAssertEqualWithAccuracy(p.variance(), 0.25, accuracy: 0.01)
+            XCTAssertEqualWithAccuracy(p.standardDeviation(), 0.5, accuracy: 0.01)
+        }
+        do {
+            let p = Exponential(mean: 0.5)
+            XCTAssertEqualWithAccuracy(p.probability(of: 0.5), 0.735, accuracy: 0.01)
+            XCTAssertEqualWithAccuracy(p.distribution(lessThan: 0.5), 0.632, accuracy: 0.01)
+            XCTAssertEqualWithAccuracy(p.expected(), 0.5, accuracy: 0.01)
+            XCTAssertEqualWithAccuracy(p.variance(), 0.25, accuracy: 0.01)
+            XCTAssertEqualWithAccuracy(p.standardDeviation(), 0.5, accuracy: 0.01)
+        }
+        do {
+            let p = Exponential(variance: 0.25)
+            XCTAssertEqualWithAccuracy(p.probability(of: 0.5), 0.735, accuracy: 0.01)
+            XCTAssertEqualWithAccuracy(p.distribution(lessThan: 0.5), 0.632, accuracy: 0.01)
+            XCTAssertEqualWithAccuracy(p.expected(), 0.5, accuracy: 0.01)
+            XCTAssertEqualWithAccuracy(p.variance(), 0.25, accuracy: 0.01)
+            XCTAssertEqualWithAccuracy(p.standardDeviation(), 0.5, accuracy: 0.01)
+        }
+    }
+    
     func testRelations() {
         let r: (Relation<Double>) -> Range<Double> = {
             $0.range(min: 0, max: 10)
