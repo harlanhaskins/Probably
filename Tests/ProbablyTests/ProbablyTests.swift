@@ -84,7 +84,8 @@ class ProbablyTests: XCTestCase {
         // 5 heads
         let flips = NegativeBinomial(requiredSuccesses: 5, probability: 0.5)
         
-        // what is the probability the 10th trial is the 5th head?
+        // what is the probability there are 10 failed trials before we
+        // get the 5th head?
         XCTAssertEqualWithAccuracy(flips.probability(of: 10), 0.030, accuracy: 0.01)
         
         // there's a 0% chance I'll hit 5 heads with 0 flips.
