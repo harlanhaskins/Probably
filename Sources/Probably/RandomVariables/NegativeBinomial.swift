@@ -33,8 +33,8 @@ public struct NegativeBinomial: RandomVariable {
     
     public func probability(of x: Interval) -> Double {
         guard x >= requiredSuccesses else { return 0 }
-        return Double((x + requiredSuccesses - 1).choose(requiredSuccesses - 1)) *
-            pow(probability, Double(x)) *
+        return Double(x + requiredSuccesses - 1).choose(Double(requiredSuccesses - 1)) *
+            pow(probability, Double(requiredSuccesses)) *
             pow(1 - probability, Double(x))
     }
     public func expected() -> Double {

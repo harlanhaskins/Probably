@@ -26,7 +26,7 @@ public struct Binomial: RandomVariable {
     public let probability: Double
     
     public func probability(of x: Int) -> Double {
-        return Double(population.choose(x)) *
+        return Double(population).choose(Double(x)) *
             (pow(probability, Double(x))) *
             pow((1 - probability), Double(population - x))
     }

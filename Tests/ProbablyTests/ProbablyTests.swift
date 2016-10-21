@@ -93,7 +93,7 @@ class ProbablyTests: XCTestCase {
         XCTAssertEqualWithAccuracy(flips.probability(of: 0), 0, accuracy: 0.01)
         
         // what is the probability that I'll get 5 heads with 5-10 trials?
-        XCTAssertEqualWithAccuracy(flips.distribution(.between(5, and: 10)), 0.204,
+        XCTAssertEqualWithAccuracy(flips.distribution(.between(5, and: 10)), 0.410,
                                    accuracy: 0.01)
         
         XCTAssertEqualWithAccuracy(flips.expected(), 5.0, accuracy: 0.01)
@@ -197,6 +197,7 @@ class ProbablyTests: XCTestCase {
             ("testHypergeometric", testHypergeometric),
             ("testBinomial", testBinomial),
             ("testGaussian", testGaussian),
+            ("testExponential", testExponential),
             ("testDiscrete", testDiscrete),
             ("testRelations", testRelations)
         ]

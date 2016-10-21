@@ -25,9 +25,9 @@ public struct Hypergeometric: RandomVariable {
     }
     
     public func probability(of x: Int) -> Double {
-        let numer = Double(successesInPopulation.choose(x) *
-            (population - successesInPopulation).choose(numberOfTrials - x))
-        let denom = Double(population.choose(numberOfTrials))
+        let numer = Double(successesInPopulation).choose(Double(x)) *
+            (Double(population - successesInPopulation)).choose(Double(numberOfTrials - x))
+        let denom = Double(population).choose(Double(numberOfTrials))
         return numer / denom
     }
     
